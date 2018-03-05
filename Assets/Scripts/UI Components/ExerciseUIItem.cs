@@ -42,7 +42,6 @@ public class ExerciseUIItem : MonoBehaviour {
     {
         excerciseNameText.text = excercise.excerciseName;
         workoutGroupNameText.text = excercise.muscleGroup.ToString();
-
     }
 
     public void SetDoneForToday ()

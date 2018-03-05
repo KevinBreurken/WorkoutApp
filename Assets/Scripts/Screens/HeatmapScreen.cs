@@ -24,6 +24,9 @@ public class HeatmapScreen : BaseState {
     private ExerciseManager exerciseManager;
 
     [SerializeField]
+    private HeatmapMuscleList heatmapMuscleList;
+
+    [SerializeField]
     private Button backButton;
 
     [Header("Body Parts")]
@@ -34,7 +37,9 @@ public class HeatmapScreen : BaseState {
         chestPart,neckPart,latsPart,middleBackPart,lowerBackPart,
         absPart,calvesPart,glutesPart,hamstringsPart,quadsPart,tricepsPart;
 
-    private int[] countAmountList;
+    [HideInInspector]
+    public int[] countAmountList;
+
     void Awake ()
     {
         backButton.onClick.AddListener(OnBackButtonClicked);
@@ -51,6 +56,7 @@ public class HeatmapScreen : BaseState {
     {
         heatmapState = (HeatmapState)uiEnumSelector.GetIndex();
         UpdateHeatmap();
+        heatmapMuscleList.DisplayItems();
     }
 
     public override IEnumerator Enter ()
@@ -59,6 +65,8 @@ public class HeatmapScreen : BaseState {
         uiEnumSelector.SetIndex((int)heatmapState);
         uiEnumSelector.UpdateText();
         UpdateHeatmap();
+        heatmapMuscleList.DisplayItems();
+        
         return base.Enter();
     }
 
