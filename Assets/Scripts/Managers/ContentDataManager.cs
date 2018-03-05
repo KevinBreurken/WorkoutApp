@@ -97,6 +97,9 @@ public class ContentDataManager : MonoBehaviour {
         excercise.totalTimesDoneToday = int.Parse(GetValueFromString(lines[9]));
         excercise.totalTimesDoneWeek = int.Parse(GetValueFromString(lines[10]));
         excercise.totalTimesDoneMonth = int.Parse(GetValueFromString(lines[11]));
+        excercise.totalTimesDoneYear = int.Parse(GetValueFromString(lines[12]));
+
+
         return excercise;
     }
     #endregion

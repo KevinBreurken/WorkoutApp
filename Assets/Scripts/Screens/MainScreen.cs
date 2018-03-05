@@ -8,7 +8,7 @@ public class MainScreen : BaseState {
 
     public RectTransform title;
     [SerializeField]
-    private Button excerciseButton,progressButton;
+    private Button excerciseButton,progressButton,heatmapButton;
     [SerializeField]
     private RectTransform buttonGroup;
 
@@ -17,9 +17,14 @@ public class MainScreen : BaseState {
 
     void Awake ()
     {
-       
+        heatmapButton.onClick.AddListener(OnHeatmapButtonClicked);
         excerciseButton.onClick.AddListener(OnExcerciseButtonClicked);
         progressButton.onClick.AddListener(OnProgressButtonClicked);
+    }
+
+    void OnHeatmapButtonClicked ()
+    {
+        StateSelector.Instance.SetState("HeatmapScreen");
     }
 
     void OnExcerciseButtonClicked ()
