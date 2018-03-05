@@ -60,6 +60,14 @@ public class ExerciseManager : MonoBehaviour {
         }
     }
 
+    public void ClearYears ()
+    {
+        for (int i = 0; i < exercises.Count; i++)
+        {
+            exercises[i].totalTimesDoneYear = 0;
+        }
+    }
+
     public void SaveData ()
     {
         for (int i = 0; i < exercises.Count; i++)

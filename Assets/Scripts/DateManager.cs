@@ -11,15 +11,19 @@ public class DateManager : MonoBehaviour {
     [SerializeField]
     private ExerciseManager exerciseManager;
 
+    public int currentYear;
     public int currentMonth;
     public int currentWeek;
     public int currentDay;
+
 	void Awake () {
         DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
         Calendar cal = dfi.Calendar;
         DateTime date = System.DateTime.Now;
-        currentWeek = cal.GetWeekOfYear(date, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
+
+        currentYear = cal.GetYear(date);
         currentMonth = cal.GetMonth(date);
+        currentWeek = cal.GetWeekOfYear(date, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
         currentDay = cal.GetDayOfYear(date);
 	}
 
@@ -29,17 +33,22 @@ public class DateManager : MonoBehaviour {
         if (date.Length > 0)
         {
 
-            if (int.Parse(GetValueFromString(date[0])) != currentMonth)
+            if (int.Parse(GetValueFromString(date[0])) != currentYear)
+            {
+                exerciseManager.ClearYears();
+                exerciseManager.SaveData();
+            }
+            if (int.Parse(GetValueFromString(date[1])) != currentMonth)
             {
                 exerciseManager.ClearMonths();
                 exerciseManager.SaveData();
             }
-            if (int.Parse(GetValueFromString(date[1])) != currentWeek)
+            if (int.Parse(GetValueFromString(date[2])) != currentWeek)
             {
                 exerciseManager.ClearWeeks();
                 exerciseManager.SaveData();
             }
-            if (int.Parse(GetValueFromString(date[2])) != currentDay)
+            if (int.Parse(GetValueFromString(date[3])) != currentDay)
             {
                 exerciseManager.ClearWeeks();
                 exerciseManager.SaveData();
@@ -47,6 +56,7 @@ public class DateManager : MonoBehaviour {
         }
 
         List<string> dateStrings = new List<string>();
+        dateStrings.Add("Year[" + currentYear + "]");
         dateStrings.Add("Month[" + currentMonth + "]");
         dateStrings.Add("Week[" + currentWeek + "]");
         dateStrings.Add("Day[" + currentDay + "]");

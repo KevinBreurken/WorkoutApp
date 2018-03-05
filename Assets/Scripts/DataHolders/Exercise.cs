@@ -47,13 +47,15 @@ public class Exercise {
     public int totalTimesDoneToday;
     public int totalTimesDoneWeek;
     public int totalTimesDoneMonth;
+    public int totalTimesDoneYear;
 
     public void AddTotalTimesCount ()
     {
-        totalTimesDoneToday++;
         totalTimesDone++;
+        totalTimesDoneToday++;
         totalTimesDoneWeek++;
         totalTimesDoneMonth++;
+        totalTimesDoneYear++;
     }
 
     public string ToSaveString ()
@@ -75,7 +77,7 @@ public class Exercise {
         saveString += totalTimesDoneToday + "_";
         saveString += totalTimesDoneWeek + "_";
         saveString += totalTimesDoneMonth + "_";
-
+        saveString += totalTimesDoneYear + "_";
         return saveString;
     }
 
@@ -93,11 +95,12 @@ public class Exercise {
         breakDuration = int.Parse(splittedString[5]);
         setAmount = int.Parse(splittedString[6]);
         repetitionAmount = int.Parse(splittedString[7]);
-        Debug.Log(splittedString[8]);
+
         totalTimesDone = int.Parse(splittedString[8]);
         totalTimesDoneToday = int.Parse(splittedString[9]);
         totalTimesDoneWeek = int.Parse(splittedString[10]);
         totalTimesDoneMonth = int.Parse(splittedString[11]);
+        totalTimesDoneMonth = int.Parse(splittedString[12]);
     }
 
     public string GetFileNameString ()
@@ -119,8 +122,10 @@ public class Exercise {
         ExcersiseString.Add("Total times done[" + totalTimesDone + "]");
         ExcersiseString.Add("Total times done today[" + totalTimesDoneToday + "]");
         ExcersiseString.Add("Total times done this week[" + totalTimesDoneWeek + "]");
-        ExcersiseString.Add("Break times done this month[" + totalTimesDoneMonth + "]");
+        ExcersiseString.Add("Total times done this month[" + totalTimesDoneMonth + "]");
+        ExcersiseString.Add("Total times done this year[" + totalTimesDoneYear + "]");
 
         return ExcersiseString.ToArray();
     }
+
 }
