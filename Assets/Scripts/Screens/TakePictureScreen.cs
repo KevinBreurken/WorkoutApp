@@ -32,7 +32,6 @@ public class TakePictureScreen : BaseState {
         imageOutput.texture = webcamTexture;
         imageOutput.material.mainTexture = webcamTexture;
 
-        webcamTexture.deviceName = WebCamTexture.devices[0].name;
 #if !UNITY_EDITOR
 
         webcamTexture.deviceName = WebCamTexture.devices[1].name;

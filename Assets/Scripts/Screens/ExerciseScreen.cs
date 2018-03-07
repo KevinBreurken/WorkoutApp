@@ -8,7 +8,8 @@ public class ExerciseScreen : BaseState {
 
     [SerializeField]
     private ExerciseManager exerciseManager;
-
+    [SerializeField]
+    private ExerciseWebcamSwitch webcamSwitch;
     public Exercise currentExcersise;
     public bool isInBreak;
     private float currentTime;
@@ -61,6 +62,7 @@ public class ExerciseScreen : BaseState {
 
     public override IEnumerator Enter ()
     {
+        webcamSwitch.Initialize();
         currentSet = 0;
         CG.alpha = 1;
         timerActive = false;
