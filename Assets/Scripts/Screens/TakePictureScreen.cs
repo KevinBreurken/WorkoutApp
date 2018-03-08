@@ -21,7 +21,8 @@ public class TakePictureScreen : BaseState {
     private CanvasGroup textCG;
     [SerializeField]
     private Text timerText;
-
+    [SerializeField]
+    private CanvasGroup seperatorCG;
     //timer
     private float timer;
     private bool isTicking;
@@ -65,6 +66,7 @@ public class TakePictureScreen : BaseState {
         timer = 5;
         isTicking = true;
         textCG.DOFade(1, 0.5f);
+        seperatorCG.DOFade(1, 0.5f);
         imageOutput.transform.DOScale(new Vector3(-1,1,1), 0.5f);
         webcamTexture.Play();
     }
@@ -89,6 +91,7 @@ public class TakePictureScreen : BaseState {
     
     private void StopCamera ()
     {
+        seperatorCG.DOFade(0, 0.5f);
         webcamTexture.Pause();
         textCG.DOFade(0, 0.5f);
         imageOutput.transform.DOScale(0.5f, 0.5f);
@@ -100,6 +103,7 @@ public class TakePictureScreen : BaseState {
         imageOutput.transform.localScale = new Vector3(-1,1,1);
         textCG.alpha = 0;
         textCG.DOFade(1, 0.5f);
+        seperatorCG.DOFade(1, 0.5f);
         webcamTexture.Play();
         isTicking = true;
         return base.Enter();
