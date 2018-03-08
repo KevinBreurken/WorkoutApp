@@ -48,23 +48,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1529997553822488
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 224398129270495438}
-  - component: {fileID: 222301398211819762}
-  - component: {fileID: 114862330954180438}
-  m_Layer: 5
-  m_Name: BG
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1961419531910876
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,7 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.303}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -117,7 +100,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: ca67bfaa3db9e9e47bbdf4285565716c, type: 3}
-    m_FontSize: 114
+    m_FontSize: 74
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -148,7 +131,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 478a6fc5edb72f1449291e46b8945817, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -221,10 +204,12 @@ MonoBehaviour:
     totalTimesDoneToday: 0
     totalTimesDoneWeek: 0
     totalTimesDoneMonth: 0
-  doneTodayColor: {r: 0.83793104, g: 0.7063869, b: 0.19900234, a: 1}
+    totalTimesDoneYear: 0
+  normalSprite: {fileID: 21300000, guid: 478a6fc5edb72f1449291e46b8945817, type: 3}
+  activeSprite: {fileID: 21300000, guid: c3f452de283062f45a7a85f9ab5aa92d, type: 3}
+  selectedSprite: {fileID: 21300000, guid: 5420ff9a42dae2f4eb34e1f0d817a95b, type: 3}
   excerciseNameText: {fileID: 114899976801314888}
   workoutGroupNameText: {fileID: 114501376248245098}
-  backgroundImage: {fileID: 114862330954180438}
   button: {fileID: 114554990476938168}
 --- !u!114 &114813093390488898
 MonoBehaviour:
@@ -239,33 +224,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
---- !u!114 &114862330954180438
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1529997553822488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.4705882, g: 0.4705882, b: 0.4705882, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
 --- !u!114 &114899976801314888
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -299,12 +257,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Bench Press Test Name
---- !u!222 &222301398211819762
-CanvasRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1529997553822488}
 --- !u!222 &222357953741495410
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -323,24 +275,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1961419531910876}
---- !u!224 &224398129270495438
-RectTransform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1529997553822488}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 224680506091421344}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20, y: -10}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224680506091421344
 RectTransform:
   m_ObjectHideFlags: 1
@@ -351,7 +285,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 224398129270495438}
   - {fileID: 224852308491069670}
   - {fileID: 224868578998659382}
   m_Father: {fileID: 0}
@@ -359,8 +292,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 3351.908, y: 475.54477}
-  m_SizeDelta: {x: 1180.5, y: 237.2}
+  m_AnchoredPosition: {x: -862, y: 389}
+  m_SizeDelta: {x: 1127, y: 236}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224852308491069670
 RectTransform:
@@ -373,13 +306,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224680506091421344}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -22.859985, y: -0.30000305}
+  m_AnchoredPosition: {x: 35, y: -54}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 1.0000001, y: -0.000000014901161}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!224 &224868578998659382
 RectTransform:
   m_ObjectHideFlags: 1
@@ -391,10 +324,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224680506091421344}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 23, y: 30.54}
+  m_AnchoredPosition: {x: 35, y: 45}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0.5}

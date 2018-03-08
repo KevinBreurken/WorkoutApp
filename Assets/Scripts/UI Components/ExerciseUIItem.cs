@@ -8,18 +8,20 @@ public class ExerciseUIItem : MonoBehaviour {
     public Exercise excercise;
 
     [SerializeField]
-    private Color doneTodayColor;
+    private Sprite normalSprite, activeSprite,selectedSprite;
+
     //UI
     [SerializeField]
     private Text excerciseNameText,workoutGroupNameText;
     [SerializeField]
-    private Image backgroundImage;
-    [SerializeField]
     private Button button;
+    private Image backgroundImage;
 
+    private bool isDoneForToday;
 
     void Awake ()
     {
+        backgroundImage = GetComponent<Image>();
         button.onClick.AddListener(OnClick);
     }
 
@@ -30,12 +32,16 @@ public class ExerciseUIItem : MonoBehaviour {
 
     public void Select ()
     {
-        GetComponent<Image>().color = Color.green;
+        backgroundImage.sprite = selectedSprite;       
     }
 
     public void Deselect ()
     {
-        GetComponent<Image>().color = Color.white;
+        if (isDoneForToday)
+            backgroundImage.sprite = activeSprite;
+        else
+            backgroundImage.sprite = normalSprite;
+       
     }
 
     public void UpdateUI ()
@@ -46,7 +52,8 @@ public class ExerciseUIItem : MonoBehaviour {
 
     public void SetDoneForToday ()
     {
-        backgroundImage.color = doneTodayColor;
+        isDoneForToday = true;
+        backgroundImage.sprite = activeSprite;
     }
 
 }
