@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,8 +15,22 @@ public class ProgressImageManager : MonoBehaviour {
         loadedImages = contentDataManager.GetAllProgressImages();
     }
 
+    public void SortImages ()
+    {
+        for (int i = 0; i < loadedImages.Count; i++)
+        {
+            loadedImages[i].CalculateDateValue();
+        }
+        loadedImages.Sort( delegate (ProgressImage x, ProgressImage y)
+         {
+             return x.dateCompareValue.CompareTo(y.dateCompareValue);
+         });
+        loadedImages.Reverse();
+         
+    }
     public List<ProgressImage> GetAllProgressImages ()
     {
+        
         return loadedImages;
     }
 

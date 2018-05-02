@@ -16,6 +16,7 @@ public class ProgressImageListManager : MonoBehaviour {
 
     public void DisplayItems ()
     {
+        progressImageManager.SortImages();
         for (int i = 0; i < spawnedItems.Count; i++)
         {
             spawnedItems[i].onRemoveClicked -= UIItem_onRemoveClicked;
