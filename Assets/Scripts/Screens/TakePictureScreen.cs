@@ -47,7 +47,8 @@ public class TakePictureScreen : BaseState {
     void OnUseButtonClicked ()
     {
         ProgressImage createdImage = new ProgressImage();
-        createdImage.date = System.DateTime.Now.ToShortDateString();
+        createdImage.SetDateString(System.DateTime.Now.ToShortDateString());
+        
         Texture2D snap = new Texture2D(webcamTexture.width, webcamTexture.height);
         snap.SetPixels(webcamTexture.GetPixels());
         snap.Apply();
