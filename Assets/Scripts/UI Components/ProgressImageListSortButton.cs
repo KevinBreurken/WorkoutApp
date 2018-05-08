@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ProgressImageListSortButton : MonoBehaviour {
 
-    public delegate void OnSortingClickedEvent (bool _state);
+    public delegate void OnSortingClickedEvent ();
     public event OnSortingClickedEvent onSortingChanged = delegate
     { };
 
@@ -31,7 +31,7 @@ public class ProgressImageListSortButton : MonoBehaviour {
     void OnToggleClicked ()
     {
         isDescending = !isDescending;
-        onSortingChanged(isDescending);
+        onSortingChanged();
         UpdateGraphic();
     }
 

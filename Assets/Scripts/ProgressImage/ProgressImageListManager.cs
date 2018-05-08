@@ -15,14 +15,24 @@ public class ProgressImageListManager : MonoBehaviour {
     [SerializeField]
     private RectTransform itemHolder;
 
+    [Header("")]
+    [SerializeField]
+    private ProgressViewSortUIItem yearSortUIItem;
+    [SerializeField]
+    private ProgressViewSortUIItem monthSortUIItem;
+    [SerializeField]
+    private ProgressViewSortUIItem exerciseSortUIItem;
+
     private bool sortDescending = true;
 
     void Awake ()
     {
-        sortButton.onSortingChanged += SortButton_onSortingChanged;
+        sortButton.onSortingChanged += OnSortingChanged;
+        yearSortUIItem.onSortingChanged += OnSortingChanged;
+        monthSortUIItem.onSortingChanged += OnSortingChanged;
     }
 
-    private void SortButton_onSortingChanged (bool _state)
+    private void OnSortingChanged ()
     {
         DisplayItems();
     }
@@ -46,12 +56,33 @@ public class ProgressImageListManager : MonoBehaviour {
 
         for (int i = 0; i < newCarouselProgressImages.Count; i++)
         {
-            GameObject spawnedObject = Instantiate(uiItemPrefab, itemHolder);
-            ProgressUIItem UIItem = spawnedObject.GetComponent<ProgressUIItem>();
-            UIItem.progressImage = newCarouselProgressImages[i];
-            UIItem.UpdateUI();
-            UIItem.onRemoveClicked += UIItem_onRemoveClicked;
-            spawnedItems.Add(UIItem);
+            bool createItem = true;
+            if(yearSortUIItem.GetIndex() != 0)
+            {
+                Debug.Log("Year index: " + yearSortUIItem.GetIndex());
+               int yearVal = System.DateTime.Now.Year - yearSortUIItem.GetIndex() + 1;
+                Debug.Log("YearVal index: " + yearVal);
+                Debug.Log("Image Val: " + newCarouselProgressImages[i].year);
+                if (yearVal != newCarouselProgressImages[i].year)
+                    createItem = false;
+            }
+
+            if (monthSortUIItem.GetIndex() != 0)
+            {
+                int monthVal = monthSortUIItem.GetIndex();
+                if (monthVal != newCarouselProgressImages[i].month)
+                    createItem = false;
+            }
+
+            if (createItem)
+            {
+                GameObject spawnedObject = Instantiate(uiItemPrefab, itemHolder);
+                ProgressUIItem UIItem = spawnedObject.GetComponent<ProgressUIItem>();
+                UIItem.progressImage = newCarouselProgressImages[i];
+                UIItem.UpdateUI();
+                UIItem.onRemoveClicked += UIItem_onRemoveClicked;
+                spawnedItems.Add(UIItem);
+            }
         }
     }
 

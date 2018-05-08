@@ -46,4 +46,17 @@ public class ProgressImageManager : MonoBehaviour {
         loadedImages.Remove(_progressImage);
     }
 
+    public ProgressImage GetOldestProgressImage ()
+    {
+        ProgressImage oldestImage = loadedImages[0];
+
+        for (int i = 0; i < loadedImages.Count; i++)
+        {
+            if (loadedImages[i].dateCompareValue < oldestImage.dateCompareValue)
+                oldestImage = loadedImages[i];
+        }
+
+        return oldestImage;
+    }
+
 }

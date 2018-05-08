@@ -9,6 +9,9 @@ public class ProgressImage {
     public string date;
     public int dateCompareValue;
 
+    public int year;
+    public int month;
+
     public void CalculateDateValue ()
     {
         string[] splittedString = date.Split('_');
@@ -20,7 +23,9 @@ public class ProgressImage {
         dateCompareValue = 0;
         dateCompareValue += int.Parse(splittedString[0]);
         dateCompareValue += int.Parse(splittedString[1]) * 100;
+        month = int.Parse(splittedString[1]);
         dateCompareValue += int.Parse(splittedString[2]) * 10000;
+        year = int.Parse(splittedString[2]);
     }
 
     /// <summary>
@@ -28,8 +33,7 @@ public class ProgressImage {
     /// </summary>
     /// <param name="_dateString"></param>
     public void SetDateString(string _dateString)
-    {
-       
+    {      
         date = _dateString;
         date = date.Replace('/', '_');
         Debug.Log("After:" + date);
