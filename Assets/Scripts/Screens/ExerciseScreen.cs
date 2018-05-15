@@ -7,6 +7,8 @@ using DG.Tweening;
 public class ExerciseScreen : BaseState {
 
     [SerializeField]
+    private ValueSetterDisplay setsValueDisplay, setDurationValueDisplay, breakValueDisplay;
+    [SerializeField]
     private ExerciseManager exerciseManager;
     [SerializeField]
     private ExerciseWebcamSwitch webcamSwitch;
@@ -26,6 +28,8 @@ public class ExerciseScreen : BaseState {
     private CanvasGroup continueTextCG, timerTextCG,descriptionTextCG,setsCG;
     [SerializeField]
     private Button actionButton,returnButton;
+    [SerializeField]
+    private RectTransform webcamButtonTransform;
 
     private CanvasGroup CG;
 
@@ -63,16 +67,21 @@ public class ExerciseScreen : BaseState {
     public override IEnumerator Enter ()
     {
         webcamSwitch.Initialize();
+        isInBreak = false;
+        timerActive = false;
         currentSet = 0;
         CG.alpha = 1;
-        timerActive = false;
-        isInBreak = false;
-        circleHolder.transform.localScale = Vector3.zero;
         fillImage.fillAmount = 0;
         timerTextCG.alpha = 0;
         descriptionTextCG.alpha = 0;
         continueTextCG.alpha = 0;
         setsCG.alpha = 0;
+        webcamButtonTransform.localScale = Vector2.zero;
+        circleHolder.transform.localScale = Vector3.zero;
+        returnButton.transform.localScale = Vector2.zero;
+
+        webcamButtonTransform.DOScale(1, 0.5f);
+        returnButton.transform.DOScale(1, 0.5f);
         circleHolder.DOScale(1, 0.5f);
         fillImage.DOFillAmount(1, 0.5f).SetDelay(0.5f);
         yield return new WaitForSeconds(1);
@@ -105,7 +114,9 @@ public class ExerciseScreen : BaseState {
 
     public IEnumerator GoToBreak ()
     {
-        if (currentSet == currentExcersise.setAmount)
+        yield return null;
+        
+        if (currentSet == setsValueDisplay.SetterValue)
         {
             currentExcersise.AddTotalTimesCount();
             exerciseManager.SaveData();
@@ -114,7 +125,7 @@ public class ExerciseScreen : BaseState {
         else
         {
 
-            currentTime = currentExcersise.breakDuration;
+            currentTime = breakValueDisplay.SetterValue;
             isInBreak = true;
             continueTextCG.DOFade(0, 0.5f);
             timerTextCG.DOFade(0, 0.5f);
@@ -126,20 +137,23 @@ public class ExerciseScreen : BaseState {
             descriptionTextCG.DOFade(1, 0.5f);
             timerActive = true;
         }
+        
     }
 
     public IEnumerator GoToExcersise ()
     {
+        yield return null;
+        
         isInBreak = false;
-        currentTime = currentExcersise.repDuration;
+        currentTime = setDurationValueDisplay.SetterValue;
         currentSet++;
-        setsText.text = "Set(" + currentSet + "/" + currentExcersise.setAmount +")";
+        setsText.text = "Set(" + currentSet + "/" + setsValueDisplay.SetterValue +")";
         descriptionTextCG.DOFade(0, 0.5f);
         continueTextCG.DOFade(0, 0.5f);
         timerTextCG.DOFade(0, 0.5f);
         setsCG.DOFade(0, 0.5f);
         yield return new WaitForSeconds(1);
-        excersiseText.text = currentExcersise.excerciseName + "(" + currentExcersise.repetitionAmount + ")" ;
+        excersiseText.text = currentExcersise.excerciseName;
         descriptionTextCG.DOFade(1, 0.5f);
         setsCG.DOFade(1, 0.5f);
         if (currentExcersise.setIsTimed)
@@ -151,13 +165,16 @@ public class ExerciseScreen : BaseState {
         {
             continueTextCG.DOFade(1, 0.5f);
         }
+        
     }
 
     public override IEnumerator Exit ()
     {
 
-        CG.DOFade(0, 0.5f);
-        yield return new WaitForSeconds(0.6f);
+        webcamButtonTransform.DOScale(0, 0.5f);
+        returnButton.transform.DOScale(0, 0.5f);
+        CG.DOFade(0, 0.5f).SetDelay(0.5f);
+        yield return new WaitForSeconds(1f);
         yield return base.Exit();
     }
 }

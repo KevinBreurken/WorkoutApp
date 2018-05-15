@@ -21,7 +21,7 @@ public class ExerciseEditPopup : MonoBehaviour {
     private UIEnumSelector muscleGroup, equipmentGroup;
     //Input fields
     [SerializeField]
-    private InputField nameInput,setDurationInput,timeBetweenSetsInput,setAmountInput,repetitionInput;
+    private InputField nameInput, setDurationInput;
     [SerializeField]private Toggle isTimedToggle;
 
     void Awake ()
@@ -91,25 +91,21 @@ public class ExerciseEditPopup : MonoBehaviour {
             isTimedToggle.isOn = false;
             nameInput.text = "New Excercise";
             setDurationInput.text = "30";
-            timeBetweenSetsInput.text = "30";
-            setAmountInput.text = "5";
-            repetitionInput.text = "10";
         }
         else
         {
             nameInput.text = currentExcercise.excerciseName;
             setDurationInput.text = currentExcercise.repDuration.ToString();
-            setAmountInput.text = currentExcercise.setAmount.ToString();
-            timeBetweenSetsInput.text = currentExcercise.breakDuration.ToString();
             muscleGroup.SetIndex((int)currentExcercise.muscleGroup);
             equipmentGroup.SetIndex((int)currentExcercise.equipmentGroup);
             isTimedToggle.isOn = currentExcercise.setIsTimed;
-            repetitionInput.text = currentExcercise.repetitionAmount.ToString();
         }
+
         canvasGroup.blocksRaycasts = true;
         canvasGroup.DOFade(1, 0.5f);
         canvasGroup.interactable = true;
         muscleGroup.UpdateText();
+
     }
 
     private Exercise GetMadeExcercise ()
@@ -117,9 +113,6 @@ public class ExerciseEditPopup : MonoBehaviour {
         Exercise newExcercise = new Exercise();
         newExcercise.excerciseName = nameInput.text;
         
-        newExcercise.setAmount = int.Parse(setAmountInput.text);
-        newExcercise.repetitionAmount = int.Parse(repetitionInput.text);
-        newExcercise.breakDuration = int.Parse(timeBetweenSetsInput.text);
         if (isTimedToggle.isOn)
         {
             newExcercise.repDuration = int.Parse(setDurationInput.text);

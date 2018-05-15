@@ -5,15 +5,31 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class SelectedInfoDisplay : MonoBehaviour {
+
+    [SerializeField]
+    private ValueSetterDisplay setsValueDisplay,setDurationValueDisplay,breakValueDisplay;
+
     [SerializeField]
     private Button startButton, editButton, deleteButton;
     private CanvasGroup CG;
     [SerializeField]
-    private Text excersiseNameDisplay, groupDisplay, setAmountDisplay, repetitionAmountDisplay, repetitionLengthDuration, breakDisplay;
+    private Text excersiseNameDisplay,equipmentDisplay;
     [SerializeField]
-    private Text totalTimesDisplay,totalTimesWeekDisplay,totalTimesMonthDisplay;
+    private Text totalTimesDisplay,totalTimesMonthDisplay;
     [SerializeField]
-    private CanvasGroup nameCG, groupCG;
+    private CanvasGroup nameCG;
+
+    [Header("Animation")]
+    [SerializeField]
+    private RectTransform exerciseLabel;
+    [SerializeField]
+    private RectTransform workoutGroupLabel,equipmentLabel;
+    [SerializeField]
+    private CanvasGroup valuesDisplay;
+    [SerializeField]
+    private RectTransform buttonHolder;
+    [SerializeField]
+    private RectTransform infoHolder;
 
     void Awake ()
     {
@@ -21,6 +37,40 @@ public class SelectedInfoDisplay : MonoBehaviour {
         startButton.onClick.AddListener(StartClicked);
         editButton.onClick.AddListener(EditClicked);
         deleteButton.onClick.AddListener(DeleteClicked);
+    }
+
+    private IEnumerator Show ()
+    {
+        CG.alpha = 1;
+        valuesDisplay.alpha = 0;
+        //set start position
+        exerciseLabel.anchoredPosition = new Vector2(1540, exerciseLabel.anchoredPosition.y);
+        workoutGroupLabel.anchoredPosition = new Vector2(1540, workoutGroupLabel.anchoredPosition.y);
+        equipmentLabel.anchoredPosition = new Vector2(1540, equipmentLabel.anchoredPosition.y);
+        infoHolder.anchoredPosition = new Vector2(1540, infoHolder.anchoredPosition.y);
+        buttonHolder.anchoredPosition = new Vector2(1000, buttonHolder.anchoredPosition.y);
+
+        exerciseLabel.DOAnchorPosX(0, 0.5f);
+        workoutGroupLabel.DOAnchorPosX(0, 0.5f).SetDelay(0.2f);
+        equipmentLabel.DOAnchorPosX(0, 0.5f).SetDelay(0.4f);
+        infoHolder.DOAnchorPosX(-124.4f, 0.5f).SetDelay(0.6f);
+        valuesDisplay.DOFade(1, 0.5f).SetDelay(0.7f);
+        buttonHolder.DOAnchorPosX(-26f, 0.5f).SetDelay(1);
+
+        yield return new WaitForSeconds(1);
+    }
+
+    private IEnumerator Hide ()
+    {
+        buttonHolder.DOAnchorPosX(1000, 0.5f);
+        valuesDisplay.DOFade(0, 0.5f);
+        exerciseLabel.DOAnchorPosX(1540, 0.5f);
+        workoutGroupLabel.DOAnchorPosX(1540, 0.5f);
+        equipmentLabel.DOAnchorPosX(1540, 0.5f);
+        infoHolder.DOAnchorPosX(1540, 0.5f);
+        yield return new WaitForSeconds(0.6f);
+
+        CG.alpha = 0;
     }
 
     void StartClicked ()
@@ -40,49 +90,47 @@ public class SelectedInfoDisplay : MonoBehaviour {
 
     public void ShowScreen(ExerciseUIItem _item)
     {
-        CG.alpha = 1;
-
+        StartCoroutine("Show");
         ExerciseUIItem selectedItem = ExerciseSelectionManager.instance.GetSelectedItem();
         Exercise exercise = selectedItem.excercise;
         excersiseNameDisplay.text = exercise.excerciseName;
-        groupDisplay.text = exercise.muscleGroup.ToString();
-        setAmountDisplay.text = exercise.setAmount.ToString();
-        repetitionAmountDisplay.text = exercise.repetitionAmount.ToString();
-        repetitionLengthDuration.gameObject.SetActive(exercise.setIsTimed);
-        repetitionLengthDuration.text = exercise.repDuration.ToString() + "second duration";
-        breakDisplay.text = exercise.breakDuration.ToString() + "second break";
         totalTimesDisplay.text = exercise.totalTimesDone.ToString();
-        totalTimesWeekDisplay.text = exercise.totalTimesDoneWeek.ToString();
         totalTimesMonthDisplay.text = exercise.totalTimesDoneMonth.ToString();
+        equipmentDisplay.text = exercise.equipmentGroup.ToString();
 
+        setsValueDisplay.Show();
+        breakValueDisplay.Show();
+
+        if (exercise.setIsTimed)
+        {
+            setDurationValueDisplay.Show();
+        }
+        else
+        {
+            setDurationValueDisplay.Hide();
+        }
+
+    }
+
+    public void HideDirect ()
+    {
+        CG.alpha = 0;
     }
 
     public void HideScreen ()
     {
-        CG.alpha = 0;
+        StartCoroutine("Hide");
     }
 
     public IEnumerator DisplayData ()
     {
         DOTween.Kill(transform.GetInstanceID());
         nameCG.alpha = 0;
-        groupCG.alpha = 0;
-        setAmountDisplay.transform.localScale = Vector3.zero;
-        repetitionAmountDisplay.transform.localScale = Vector3.zero;
-
         RectTransform nameRect = nameCG.transform.GetComponent<RectTransform>();
         nameRect.anchoredPosition = new Vector2(nameRect.anchoredPosition.x, 630);
         nameRect.DOAnchorPosY(582, 0.5f).SetId(transform.GetInstanceID());
         nameCG.DOFade(1, 0.5f).SetId(transform.GetInstanceID());
-        yield return new WaitForSeconds(0.5f);
-
-        RectTransform groupRect = groupCG.transform.GetComponent<RectTransform>();
-        groupRect.anchoredPosition = new Vector2(-600, groupRect.anchoredPosition.y);
-        groupRect.DOAnchorPosX(-890, 0.5f).SetId(transform.GetInstanceID());
-        groupCG.DOFade(1, 0.5f).SetId(transform.GetInstanceID());
         yield return new WaitForSeconds(0.3f);
-        setAmountDisplay.transform.DOScale(1, 0.5f).SetEase(Ease.OutBack).SetId(transform.GetInstanceID());
-        repetitionAmountDisplay.transform.DOScale(1, 0.5f).SetEase(Ease.OutBack).SetId(transform.GetInstanceID());
-
+ 
     }
 }

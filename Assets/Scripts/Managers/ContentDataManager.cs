@@ -89,10 +89,7 @@ public class ContentDataManager : MonoBehaviour {
         excercise.muscleGroup = (Exercise.MuscleGroup)System.Enum.Parse(typeof(Exercise.MuscleGroup), GetValueFromString(lines[1]));
         excercise.equipmentGroup = (Exercise.EquipmentGroup)System.Enum.Parse(typeof(Exercise.EquipmentGroup), GetValueFromString(lines[2]));
         excercise.setIsTimed = (GetValueFromString(lines[3]) == "True");
-        excercise.setAmount = int.Parse(GetValueFromString(lines[4]));
-        excercise.repetitionAmount = int.Parse(GetValueFromString(lines[5]));
         excercise.repDuration = int.Parse(GetValueFromString(lines[6]));
-        excercise.breakDuration = int.Parse(GetValueFromString(lines[7]));
         excercise.totalTimesDone = int.Parse(GetValueFromString(lines[8]));
         excercise.totalTimesDoneToday = int.Parse(GetValueFromString(lines[9]));
         excercise.totalTimesDoneWeek = int.Parse(GetValueFromString(lines[10]));
